@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: cs_task
+
+management:
+  endpoints:
+    web.exposure.include: health,info,prometheus,heapdump,threaddump,loggers,refresh,dshealthrest
+  endpoint:
+    health:
+      enabled: true
+      probes.enabled: true
+      show-details: always
+    prometheus.enabled: true
+    info.enabled: true
+    loggers.enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+    export:
+      prometheus.enabled: true
+    tags:
+      application: ${spring.application.name}
+
+cs-task:
+  task-delay-ms: 3000
+  tasks-name:
+    - testTask
